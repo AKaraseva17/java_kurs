@@ -6,10 +6,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-  private SessionHelper sessionHelper;
+
   WebDriver wd;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
+  private SessionHelper sessionHelper;
 
   public void init() {
     wd = new ChromeDriver();
@@ -20,7 +21,7 @@ public class ApplicationManager {
     sessionHelper = new SessionHelper(wd);
     sessionHelper.login("admin", "secret");
   }
-  
+
   public void stop() {
     wd.quit();
   }
