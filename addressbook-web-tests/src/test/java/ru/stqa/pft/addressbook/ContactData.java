@@ -1,12 +1,12 @@
 package ru.stqa.pft.addressbook;
 
-public class ContractData {
+public class ContactData {
   private final String firstname;
   private final String lastname;
   private final String email;
   private final String homePhone;
 
-  public ContractData(String firstname, String lastname, String email, String homePhone) {
+  public ContactData(String firstname, String lastname, String email, String homePhone) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;

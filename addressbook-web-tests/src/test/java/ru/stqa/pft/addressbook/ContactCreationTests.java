@@ -34,20 +34,20 @@ public class ContactCreationTests {
   @Test
   public void testContactCreation() throws Exception {
     gotoAddNewPage();
-    fillContractForm(new ContractData("Медведь", "Балалайкин", "balalaikin@mail.ru", "87777654352"));
-    outputContractForm();
-    returnToContractPage();
+    fillContactForm(new ContactData("Медведь", "Балалайкин", "balalaikin@mail.ru", "87777654352"));
+    outputContactForm();
+    returnToContactPage();
   }
 
-  private void returnToContractPage() {
+  private void returnToContactPage() {
     wd.findElement(By.linkText("home page")).click();
   }
 
-  private void outputContractForm() {
+  private void outputContactForm() {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
-  private void fillContractForm(ContractData contractData) {
+  private void fillContactForm(ContactData contractData) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(contractData.getFirstname());
