@@ -11,11 +11,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void returnToContactPage() {
-    wd.findElement(By.linkText("home page")).click();
-  }
-
-  public void outputContactForm() {
-    wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    click(By.linkText("home page"));
   }
 
   public void fillContactForm(ContactData contractData) {
