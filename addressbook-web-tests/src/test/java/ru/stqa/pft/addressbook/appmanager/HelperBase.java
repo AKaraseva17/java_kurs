@@ -16,15 +16,6 @@ public class HelperBase {
     wd.findElement(locator).click();
   }
 
-  public void outputContactForm() {
-    clickEnter(By.xpath("//div[@id='content']/form/input[21]"));
-  }
-
-  private void clickEnter(By locator) {
-    wd.findElement(locator).click();
-  }
-
-
   protected void type(By locator, String text) {
     click(locator);
     wd.findElement(locator).clear();
