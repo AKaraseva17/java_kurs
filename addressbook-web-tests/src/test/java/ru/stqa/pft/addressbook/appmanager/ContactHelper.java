@@ -42,8 +42,9 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[22]"));
   }
 
-  public void initIDContactModification(String id) {
-    click(By.id(id));
+
+  public void selectContact() {
+    click(By.name("selected[]"));
   }
 
   public void outputContactDeletionForm() {
@@ -59,4 +60,6 @@ public class ContactHelper extends HelperBase {
     }
   }
 }
+
+
 
