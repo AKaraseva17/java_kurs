@@ -4,22 +4,34 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.Comparator;
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
+
 public class ContactModificationTests extends TestBase {
   @Test
   public void testContactModification() {
     app.getNavigationHelper().gotoHomePage();
-    int before = app.getContactHelper().getContactCount();
     if (!app.getContactHelper().isThereAContact()) {
       app.getNavigationHelper().gotoAddNewPage();
       app.getContactHelper().createContact(new ContactData("Медведь", "Балалайкин", "balalaikin@mail.ru", "87777654352"));
     }
-    app.getContactHelper().selectContact(before - 1);
-    app.getContactHelper().initContactModification();
-    app.getContactHelper().fillContactForm(new ContactData("Понин", "Василий", "kotovic@mail.ru", "87777666666"));
-    app.getContactHelper().outputContactModificationForm();
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.getContactHelper().selectContact(before.size() - 1);
+    app.getContactHelper().chooseContactEdit(before.get(before.size() - 1).getId());
+    ContactData contact = new ContactData(before.get(before.size()-1).getId(),"Понин", "Василий", "kotovic@mail.ru", "87777666666");
+    app.getContactHelper().fillContactForm(contact);
+    app.getContactHelper().updateContact();
     app.getContactHelper().returnToContactPage();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after,before);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    assertEquals(after.size(), before.size());
 
+    before.remove(before.size() - 1);
+    before.add(contact);
+    Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before,after);
   }
 }
