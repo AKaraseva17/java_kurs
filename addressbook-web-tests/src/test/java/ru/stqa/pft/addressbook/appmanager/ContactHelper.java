@@ -64,6 +64,13 @@ public class ContactHelper extends HelperBase {
     outputContactForm();
     returnToContactPage();
   }
+  public void modifyContact(List<ContactData> before, int index, ContactData contact) {
+    selectContact(index);
+    chooseContactEdit(before.get(index).getId());
+    fillContactForm(contact);
+    updateContact();
+    returnToContactPage();
+  }
 
   public void updateContact() {
     click(By.name("update"));
