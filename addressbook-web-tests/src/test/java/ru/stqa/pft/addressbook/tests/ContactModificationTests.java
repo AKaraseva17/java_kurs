@@ -13,19 +13,19 @@ import static org.testng.Assert.assertEquals;
 public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions(){
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getNavigationHelper().gotoAddNewPage();
-      app.getContactHelper().createContact(new ContactData("Медведь", "Балалайкин", "balalaikin@mail.ru", "87777654352"));
+    if (app.contact().list().size() == 0) {
+      app.goTo().addNewPage();
+      app.contact().createContact(new ContactData("Медведь", "Балалайкин", "balalaikin@mail.ru", "87777654352"));
     }
   }
   @Test
   public void testContactModification() {
-    app.getNavigationHelper().gotoHomePage();
-    List<ContactData> before = app.getContactHelper().getContactList();
+    app.goTo().homePage();
+    List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
     ContactData contact = new ContactData(before.get(index).getId(),"Понин", "Василий", "kotovic@mail.ru", "87777666666");
-    app.getContactHelper().modifyContact(before, index, contact);
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.contact().modify(before, index, contact);
+    List<ContactData> after = app.contact().list();
     assertEquals(after.size(), before.size());
 
     before.remove(index);
