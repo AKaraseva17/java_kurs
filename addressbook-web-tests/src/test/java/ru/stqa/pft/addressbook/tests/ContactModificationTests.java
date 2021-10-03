@@ -10,7 +10,7 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 
 public class ContactModificationTests extends TestBase {
-  @Test
+  @Test (enabled = false)
   public void testContactModification() {
     app.getNavigationHelper().gotoHomePage();
     if (!app.getContactHelper().isThereAContact()) {
