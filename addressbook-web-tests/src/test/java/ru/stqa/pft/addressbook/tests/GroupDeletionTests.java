@@ -10,14 +10,14 @@ import java.util.List;
 public class GroupDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions (){
+    app.goTo().groupPage();
     if (app.group().list().size() == 0){
-      app.group().create(new GroupData("test1", null, null));
+      app.group().create(new GroupData().withName("test1"));
     }
   }
 
   @Test
   public void testGroupDeletion() throws Exception {
-    app.goTo().groupPage();
     List<GroupData> before = app.group().list();
     int index = before.size() - 1;
     app.group().delete(index);
