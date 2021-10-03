@@ -44,9 +44,9 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
   public void selectContactById(int id) {
-    wd.findElement(By.cssSelector("a[href=\"edit.php?id=" + id + "\"]")).click();
+    wd.findElement(By.cssSelector("input[value='"+ id +"']")).click();
   }
-  public void chooseContactEdit(int id) {
+  public void chooseContactEditById(int id) {
     wd.findElement(By.cssSelector("a[href=\"edit.php?id=" + id + "\"]")).click();
   }
 
@@ -69,9 +69,9 @@ public class ContactHelper extends HelperBase {
     outputContactForm();
     returnToContactPage();
   }
-  public void modify(List<ContactData> before, int index, ContactData contact) {
-    selectContact(index);
-    chooseContactEdit(before.get(index).getId());
+  public void modify(ContactData contact) {
+    selectContactById(contact.getId());
+    chooseContactEditById(contact.getId());
     fillContactForm(contact);
     updateContact();
     returnToContactPage();
