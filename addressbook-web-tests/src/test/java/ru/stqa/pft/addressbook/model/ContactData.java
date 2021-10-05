@@ -4,10 +4,12 @@ import java.util.Objects;
 
 public class ContactData {
   private int id = Integer.MAX_VALUE;
-  private  String firstname;
-  private  String lastname;
-  private  String email;
-  private  String homePhone;
+  private String firstname;
+  private String lastname;
+  private String email;
+  private String homePhone;
+  private String mobilePhone;
+  private String workPhone;
 
   public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
@@ -23,13 +25,21 @@ public class ContactData {
     this.email = email;
     return this;
   }
-
   public ContactData withHomePhone(String homePhone) {
     this.homePhone = homePhone;
     return this;
   }
+
   public ContactData withId(int id) {
     this.id = id;
+    return this;
+  }
+  public ContactData withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+  public ContactData withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
     return this;
   }
 
@@ -65,6 +75,10 @@ public class ContactData {
   public String getHomePhone() {
     return homePhone;
   }
+
+  public String getMobilePhone() {return mobilePhone;}
+
+  public String getWorkPhone(){return workPhone;}
 
   @Override
   public String toString() {
