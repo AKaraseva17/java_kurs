@@ -11,6 +11,33 @@ public class ContactData {
   private String mobilePhone;
   private String workPhone;
   private String email2;
+  private String email3;
+  private String allPhones;
+  private String allEmails;
+
+
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
 
   public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
@@ -97,6 +124,10 @@ public class ContactData {
     return email2;
   }
 
+  public String getEmail3() {
+    return email3;
+  }
+
   @Override
   public String toString() {
     return "ContactData{" +
@@ -108,6 +139,7 @@ public class ContactData {
             ", mobilePhone='" + mobilePhone + '\'' +
             ", workPhone='" + workPhone + '\'' +
             ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
             '}';
   }
 

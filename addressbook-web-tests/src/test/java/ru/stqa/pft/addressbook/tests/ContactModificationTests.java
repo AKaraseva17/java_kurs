@@ -15,8 +15,9 @@ public class ContactModificationTests extends TestBase {
     if (app.contact().list().size() == 0) {
       app.goTo().addNewPage();
       app.contact().createContact(new ContactData()
-              .withLastname("Медведь").withFirstname("Балалайкин").withEmail("balalaikin@mail.ru").withHomePhone("87777654352")
-              .withWorkPhone("111").withMobilePhone("222").withEmail2("green-Street@void"));
+              .withLastname("Медведь").withFirstname("Балалайкин").withEmail("balalaikin@mail.ru")
+              .withWorkPhone("111").withMobilePhone("222")
+              .withHomePhone("87777654352").withEmail2("green-Street@void").withEmail2("viadomus@void.com"));
     }
   }
   @Test
@@ -24,8 +25,9 @@ public class ContactModificationTests extends TestBase {
     Contacts before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withId(modifiedContact.getId())
-            .withLastname("Понин").withFirstname("Василий").withEmail("kotovic@mail.ru")
-            .withHomePhone("87777666666").withWorkPhone("111").withMobilePhone("222").withEmail2("yellow-Street@void");;
+            .withLastname("Понин").withFirstname("Василий")
+            .withHomePhone("87777666666").withWorkPhone("111").withMobilePhone("222")
+            .withEmail("kotovic@mail.ru").withEmail2("yellow-Street@void").withEmail2("deadrain@void.com");;
     app.contact().modify(contact);
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();
