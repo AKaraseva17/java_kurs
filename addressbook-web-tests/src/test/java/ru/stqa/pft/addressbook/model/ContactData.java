@@ -15,7 +15,19 @@ public class ContactData {
   private String email3;
   private String allPhones;
   private String allEmails;
+  private String address;
   private File photo;
+
+  public String getAddress() {
+    return address;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+
 
   public File getPhoto() {
     return photo;
@@ -144,12 +156,6 @@ public class ContactData {
             "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
-            ", email='" + email + '\'' +
-            ", homePhone='" + homePhone + '\'' +
-            ", mobilePhone='" + mobilePhone + '\'' +
-            ", workPhone='" + workPhone + '\'' +
-            ", email2='" + email2 + '\'' +
-            ", email3='" + email3 + '\'' +
             '}';
   }
 
