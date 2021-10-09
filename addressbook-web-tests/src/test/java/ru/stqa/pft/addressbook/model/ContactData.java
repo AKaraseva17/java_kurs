@@ -150,15 +150,18 @@ public class ContactData {
     return email3;
   }
 
+
   @Override
   public String toString() {
     return "ContactData{" +
             "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", email='" + email + '\'' +
+            ", homePhone='" + homePhone + '\'' +
+            ", address='" + address + '\'' +
+            ", photo=" + photo +
             '}';
   }
-
-
 }
 
