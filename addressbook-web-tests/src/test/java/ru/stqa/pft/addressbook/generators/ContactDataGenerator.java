@@ -30,7 +30,7 @@ public class ContactDataGenerator {
     }
     generator.run();
   }
-  
+
   private void run() throws IOException {
     List<ContactData> contacts = generateContacts(count);
     save(contacts,new File(file));
