@@ -26,6 +26,7 @@ public class HpConnectionTest {
       sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
     }
     catch (Exception e) {
+      e.printStackTrace();
       // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
       // so destroy it manually.
       StandardServiceRegistryBuilder.destroy(registry);
@@ -48,7 +49,7 @@ public class HpConnectionTest {
   public void testContactHpConnection(){
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00'" ).list();
+    List<ContactData> result = session.createQuery("from ContactData where deprecated = '0000-00-00'").list();
     for (ContactData contact : result) {
       System.out.println(contact);
     }

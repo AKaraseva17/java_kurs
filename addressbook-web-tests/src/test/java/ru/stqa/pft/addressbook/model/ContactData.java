@@ -28,7 +28,13 @@ public class ContactData {
 
   @Expose
   @Column(name = "email")
+  @Type(type = "text")
   private String email;
+
+  @Expose
+  @Column(name = "deprecated")
+  @Type(type = "timestamp")
+  private String deprecated;
 
   @Expose
   @Column(name = "home")
@@ -57,13 +63,14 @@ public class ContactData {
   private String allEmails;
 
   @Expose
-  @Type(type = "text")
   @Column(name = "address")
+  @Type(type = "text")
   private String address;
 
   @Column(name = "photo")
   @Type(type = "text")
   private String photo;
+
 
   public String getAddress() {
     return address;
