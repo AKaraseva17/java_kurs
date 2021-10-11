@@ -34,6 +34,7 @@ public class ContactData {
   @Expose
   @Column(name = "deprecated")
   @Type(type = "timestamp")
+  @Transient
   private String deprecated;
 
   @Expose
@@ -80,8 +81,6 @@ public class ContactData {
     this.address = address;
     return this;
   }
-
-
 
   public File getPhoto() {
     return new File(photo);

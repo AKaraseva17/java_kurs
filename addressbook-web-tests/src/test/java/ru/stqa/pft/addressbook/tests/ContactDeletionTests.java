@@ -11,18 +11,19 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions(){
-    app.goTo().homePage();
-    if (app.contact().list().size() == 0) {
+    if (app.db().contacts().size() == 0) {
+      app.goTo().homePage();
       app.goTo().addNewPage();
       app.contact().createContact(new ContactData()
-              .withLastname("Медведь").withFirstname("Балалайкин")
-              .withHomePhone("87777654352").withWorkPhone("111").withMobilePhone("222")
-              .withEmail("balalaikin@mail.ru").withEmail2("green-Street@void").withEmail2("viadomus@void.com"));
+              .withLastname("Медведь").withFirstname("Балалайкин").withEmail("balalaikin@mail.ru")
+              .withWorkPhone("111").withMobilePhone("222")
+              .withHomePhone("87777654352").withEmail2("green-Street@void").withEmail2("viadomus@void.com"));
     }
   }
   @Test
   public void testContactDeletion() throws Exception {
     Contacts before = app.contact().all();
+    app.goTo().homePage();
     ContactData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
     assertThat(app.contact().count(), equalTo(before.size() - 1));
