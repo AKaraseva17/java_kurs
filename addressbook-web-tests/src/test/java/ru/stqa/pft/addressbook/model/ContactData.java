@@ -16,14 +16,17 @@ public class ContactData {
   @XStreamOmitField
   @Id
   @Column(name = "id")
+  @Type(type = "int")
   private int id = Integer.MAX_VALUE;
 
   @Expose
   @Column(name = "firstname")
+  @Type(type = "text")
   private String firstname;
 
   @Expose
   @Column(name = "lastname")
+  @Type(type = "text")
   private String lastname;
 
   @Expose
