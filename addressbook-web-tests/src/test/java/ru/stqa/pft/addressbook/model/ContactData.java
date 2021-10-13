@@ -7,7 +7,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -35,9 +37,7 @@ public class ContactData {
   private String email;
 
   @Expose
-  @Column(name = "deprecated")
-  @Type(type = "timestamp")
-  @Transient
+  @Column(name = "deprecated", columnDefinition = "datetime")
   private String deprecated;
 
   @Expose
@@ -75,6 +75,17 @@ public class ContactData {
   @Type(type = "text")
   private String photo;
 
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+  public String getDeprecated() {
+    return deprecated;
+  }
 
   public String getAddress() {
     return address;
