@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
@@ -34,7 +35,16 @@ public class ContactHelper extends HelperBase {
     type(By.name("email"), contactData.getEmail());
     type(By.name("email2"), contactData.getEmail2());
     type(By.name("email3"), contactData.getEmail3());
+
   }
+ /* public boolean isElementPresent(By locator){
+    try {
+      wd.findElement(locator);
+      return true;
+    } catch (NoSuchElementException ex) {
+      return false;
+    }
+  }*/
 
   public void initContactModification() {
     click(By.xpath("//img[@alt='Edit']"));
@@ -50,6 +60,15 @@ public class ContactHelper extends HelperBase {
 
   public void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+  }
+
+  public void selectListGroup(){
+    List<WebElement> options =  wd.findElement(By.name("to_group")).findElements(By.tagName("option"));
+    WebElement option = options.get(0);
+    String value = option.getText();
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(value);
+    click(By.name("add"));
+
   }
 
   public void chooseContactEditById(int id) {
@@ -98,6 +117,11 @@ public class ContactHelper extends HelperBase {
     contactCache = null;
     isAlertPresent();
   }
+  public void addInGroup(ContactData contact){
+    selectContactById(contact.getId());
+    selectListGroup();
+  }
+
 
   public void updateContact() {
     click(By.name("update"));
