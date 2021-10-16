@@ -5,6 +5,7 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
@@ -25,7 +26,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void fillContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("address"), contactData.getHomePhone());
@@ -36,7 +37,17 @@ public class ContactHelper extends HelperBase {
     type(By.name("email2"), contactData.getEmail2());
     type(By.name("email3"), contactData.getEmail3());
 
+    if(creation) {
+      if (contactData.getGroups().size() >0){
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+      }
+      new Select(wd.findElement(By.name("new_group")))
+              .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
+
  /* public boolean isElementPresent(By locator){
     try {
       wd.findElement(locator);
@@ -90,7 +101,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void createContact(ContactData contact) {
-    fillContactForm(contact);
+    fillContactForm(contact,true);
     outputContactForm();
     contactCache = null;
     returnToContactPage();
@@ -99,17 +110,12 @@ public class ContactHelper extends HelperBase {
   public void modify(ContactData contact) {
     selectContactById(contact.getId());
     chooseContactEditById(contact.getId());
-    fillContactForm(contact);
+    fillContactForm(contact,false);
     updateContact();
     contactCache = null;
     returnToContactPage();
   }
 
-  public void delete(int index) {
-    selectContact(index);
-    outputContactDeletionForm();
-    isAlertPresent();
-  }
 
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
@@ -122,17 +128,8 @@ public class ContactHelper extends HelperBase {
     selectListGroup();
   }
 
-
   public void updateContact() {
     click(By.name("update"));
-  }
-
-  private void clickEnter() {
-    click(By.name("submit"));
-  }
-
-  public boolean isThereAContact() {
-    return isElementPresent(By.name("selected[]"));
   }
 
   public int count() {

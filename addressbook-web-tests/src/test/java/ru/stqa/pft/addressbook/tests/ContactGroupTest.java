@@ -6,7 +6,8 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-public class ContactAddressTests extends TestBase {
+public class ContactGroupTest extends TestBase{
+
   @BeforeMethod
   public void ensurePreconditions (){
     if(app.db().groups().size() ==0){
@@ -25,7 +26,7 @@ public class ContactAddressTests extends TestBase {
       app.contact().createContact(newContact);
     }
   }
-  @Test
+@Test
   public void testContact(){
     Groups groups = app.db().groups();
     ContactData contact = app.db().contacts().iterator().next();
@@ -34,4 +35,3 @@ public class ContactAddressTests extends TestBase {
   }
 
 }
-
