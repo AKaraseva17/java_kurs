@@ -75,8 +75,6 @@ public class ContactData {
   @Type(type = "text")
   private String photo;
 
-  @Transient
-  private String group;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "address_in_groups",
@@ -202,8 +200,6 @@ public class ContactData {
   }
 
   public String getAllEmails() {return allEmails;}
-
-  public String getGroup() {return group;}
 
   public Groups getGroups() {
     return new Groups(groups);
